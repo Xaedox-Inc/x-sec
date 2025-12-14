@@ -150,10 +150,14 @@ pub enum ScanStatus {
 
 impl ScanResult {
     pub fn new(module_name: String, target: Target) -> Self {
+        Self::new_with_timestamp(module_name, target, chrono::Utc::now().to_rfc3339())
+    }
+    
+    pub fn new_with_timestamp(module_name: String, target: Target, timestamp: String) -> Self {
         Self {
             module_name,
             target,
-            timestamp: chrono::Utc::now().to_rfc3339(),
+            timestamp,
             duration_ms: 0,
             status: ScanStatus::Success,
             findings: Vec::new(),

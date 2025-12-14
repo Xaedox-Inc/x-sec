@@ -37,10 +37,10 @@ impl PortScanner {
         let addr = format!("{}:{}", host, port);
         let timeout_duration = Duration::from_millis(self.config.timeout_ms);
         
-        match timeout(timeout_duration, TcpStream::connect(&addr)).await {
-            Ok(Ok(_)) => true,
-            _ => false,
-        }
+        matches!(
+            timeout(timeout_duration, TcpStream::connect(&addr)).await,
+            Ok(Ok(_))
+        )
     }
     
     fn port_to_service(port: u16) -> &'static str {
@@ -149,10 +149,11 @@ impl SecurityModule for PortScanner {
             ));
         }
         
-        // Basic validation - could be enhanced with proper IP/hostname validation
-        if !target.host.chars().all(|c| c.is_alphanumeric() || c == '.' || c == '-') {
+        // Basic validation for hostname/IP - allows alphanumeric, dots, hyphens, colons (IPv6), underscores
+        // This is intentionally permissive to support various hostname formats
+        if !target.host.chars().all(|c| c.is_alphanumeric() || c == '.' || c == '-' || c == ':' || c == '_') {
             return Err(ModuleError::InvalidTarget(
-                "Invalid hostname or IP address".to_string(),
+                "Invalid hostname or IP address format".to_string(),
             ));
         }
         
