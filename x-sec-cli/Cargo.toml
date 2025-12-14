@@ -1,0 +1,17 @@
+[package]
+name = "x-sec-cli"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "x-sec"
+path = "src/main.rs"
+
+[dependencies]
+x-sec-core = { path = "../x-sec-core" }
+x-sec-modules = { path = "../x-sec-modules" }
+tokio = { workspace = true }
+anyhow = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+clap = { version = "4.4", features = ["derive"] }

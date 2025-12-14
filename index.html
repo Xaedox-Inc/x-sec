@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/src-tauri/icons/32x32.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>X-Sec - Security Penetration Testing Tool</title>
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <h1>🔒 X-Sec</h1>
+        <p class="subtitle">Modular Security Penetration Testing Tool</p>
+      </header>
+
+      <main>
+        <section class="card">
+          <h2>Available Modules</h2>
+          <div id="modules-list" class="modules-list">
+            <p class="loading">Loading modules...</p>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Configure Scan</h2>
+          <form id="scan-form">
+            <div class="form-group">
+              <label for="module-select">Security Module:</label>
+              <select id="module-select" required>
+                <option value="">Select a module...</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="target-input">Target (IP or Hostname):</label>
+              <input 
+                type="text" 
+                id="target-input" 
+                placeholder="e.g., 192.168.1.1 or example.com"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="port-input">Port (Optional):</label>
+              <input 
+                type="number" 
+                id="port-input" 
+                placeholder="Leave empty to scan common ports"
+                min="1"
+                max="65535"
+              />
+            </div>
+
+            <button type="submit" class="btn-primary">
+              🔍 Execute Scan
+            </button>
+          </form>
+        </section>
+
+        <section class="card">
+          <h2>Scan Results</h2>
+          <div id="results-container">
+            <p class="placeholder">No scan results yet. Execute a scan to see results.</p>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Scan History</h2>
+          <button id="load-history-btn" class="btn-secondary">
+            📋 Load History
+          </button>
+          <div id="history-container">
+            <p class="placeholder">Click "Load History" to view previous scans.</p>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <p>X-Sec v0.1.0 | Built with Rust + Tauri + TypeScript</p>
+      </footer>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
