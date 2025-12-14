@@ -1,0 +1,11 @@
+[package]
+name = "x-sec-modules"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+x-sec-core = { path = "../x-sec-core" }
+tokio = { workspace = true }
+anyhow = { workspace = true }
+chrono = { workspace = true }
+async-trait = "0.1"
