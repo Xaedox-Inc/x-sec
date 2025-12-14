@@ -163,6 +163,7 @@ impl SecurityModule for PortScanner {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use x_sec_core::Protocol;
 
     #[tokio::test]
     async fn test_port_scanner_creation() {
